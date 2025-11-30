@@ -83,7 +83,7 @@ PowerLabel.BorderSizePixel = 0
 PowerLabel.Position = UDim2.new(0.06, 0, 0.16, 0)
 PowerLabel.Size = UDim2.new(0.88, 0, 0, 30)
 PowerLabel.Font = Enum.Font.GothamBold
-PowerLabel.Text = "⚡ POWER: INFINITE ♾️ ⚡"
+PowerLabel.Text = "⚡ POWER: 50,000,000 ⚡"
 PowerLabel.TextColor3 = Color3.fromRGB(255, 50, 255)
 PowerLabel.TextSize = 16.000
 
@@ -173,8 +173,8 @@ local function InfiniteFlingScript()
 	local FXFolder = Instance.new("Folder", workspace)
 	FXFolder.Name = "InfiniteFlingFX"
 	
-	-- INFINITE POWER - MATH.HUGE (∞)
-	local FLING_POWER = math.huge
+	-- MAXIMUM SAFE POWER (Infinite causes NaN errors, using 50M instead)
+	local FLING_POWER = 50000000
 	
 	-- Create detection marker
 	if not ReplicatedStorage:FindFirstChild("SuperFling_INFINITE") then
@@ -185,7 +185,24 @@ local function InfiniteFlingScript()
 	
 	-- REALITY DISTORTION AURA
 	local auraConnection
+	local auraObjects = {}
+	
+	local function destroyAura()
+		for _, obj in pairs(auraObjects) do
+			if obj and obj.Parent then
+				obj:Destroy()
+			end
+		end
+		auraObjects = {}
+		if auraConnection then
+			auraConnection:Disconnect()
+			auraConnection = nil
+		end
+	end
+	
 	local function createInfiniteAura()
+		destroyAura()
+		
 		local lp = Players.LocalPlayer
 		local char = lp.Character
 		if not char then return end
@@ -202,7 +219,9 @@ local function InfiniteFlingScript()
 		aura.Color = Color3.fromRGB(150, 0, 255)
 		aura.Transparency = 0.6
 		aura.Shape = Enum.PartType.Ball
+		aura.CFrame = root.CFrame
 		aura.Parent = FXFolder
+		table.insert(auraObjects, aura)
 		
 		-- Energy rings
 		local rings = {}
@@ -214,18 +233,20 @@ local function InfiniteFlingScript()
 			ring.Material = Enum.Material.Neon
 			ring.Color = Color3.fromRGB(255, 0, 255)
 			ring.Transparency = 0.7
+			ring.CFrame = root.CFrame
 			ring.Parent = FXFolder
 			
 			local mesh = Instance.new("SpecialMesh")
 			mesh.MeshType = Enum.MeshType.Cylinder
 			mesh.Parent = ring
 			
+			table.insert(auraObjects, ring)
 			table.insert(rings, {part = ring, offset = i * 120})
 		end
 		
-		-- Lightning bolts
+		-- Lightning bolts function
 		local function createLightning()
-			if not auraEnabled then return end
+			if not auraEnabled or not root or not root.Parent then return end
 			local lightning = Instance.new("Part")
 			lightning.Size = Vector3.new(0.3, 15, 0.3)
 			lightning.Anchored = true
@@ -245,20 +266,13 @@ local function InfiniteFlingScript()
 		end
 		
 		auraConnection = RunService.Heartbeat:Connect(function()
-			if not auraEnabled or not root.Parent then
-				aura:Destroy()
-				for _, ring in pairs(rings) do
-					ring.part:Destroy()
-				end
-				if auraConnection then
-					auraConnection:Disconnect()
-				end
+			if not auraEnabled or not root or not root.Parent or not aura.Parent then
+				destroyAura()
 				return
 			end
 			
 			-- Update aura position
-			aura.Position = root.Position
-			aura.CFrame = aura.CFrame * CFrame.Angles(0, math.rad(2), 0)
+			aura.CFrame = root.CFrame * CFrame.Angles(0, math.rad(tick() * 50), 0)
 			
 			-- Pulse effect
 			local scale = 1 + math.sin(tick() * 3) * 0.2
@@ -266,7 +280,9 @@ local function InfiniteFlingScript()
 			
 			-- Update rings
 			for i, ring in pairs(rings) do
-				ring.part.CFrame = root.CFrame * CFrame.Angles(math.rad(90), 0, math.rad(ring.offset + (tick() * 100)))
+				if ring.part and ring.part.Parent then
+					ring.part.CFrame = root.CFrame * CFrame.Angles(math.rad(90), 0, math.rad(ring.offset + (tick() * 100)))
+				end
 			end
 			
 			-- Random lightning
@@ -348,9 +364,7 @@ local function InfiniteFlingScript()
 		else
 			auraButton.Text = "AURA: OFF"
 			auraButton.BackgroundColor3 = Color3.fromRGB(100, 0, 150)
-			if auraConnection then
-				auraConnection:Disconnect()
-			end
+			destroyAura()
 		end
 	end)
 	
@@ -396,8 +410,8 @@ end
 coroutine.wrap(InfiniteFlingScript)()
 
 print("♾️🔥💀 SUPER'S INFINITE TOUCHFLING LOADED 💀🔥♾️")
-print("⚡ POWER: INFINITE (NO LIMITS) ⚡")
+print("⚡ POWER: 50,000,000 (MAXIMUM STABLE) ⚡")
 print("🌌 REALITY BREAKING MODE ACTIVATED 🌌")
-print("Features: Infinite power, reality distortion aura, RGB effects")
-print("This is the ULTIMATE maximum - nothing can beat this!")
+print("Features: 50M power, reality distortion aura, RGB effects")
+print("This is the ULTIMATE maximum - stable and powerful!")
 print("Drag GUI to move it around")
