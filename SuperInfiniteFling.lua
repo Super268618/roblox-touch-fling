@@ -1,11 +1,14 @@
--- Super's ULTIMATE Touchfling + AUTO FLING - 50,000,000 POWER
--- WARNING: EXTREME POWER + FTL AUTO TARGETING
+-- SUPER'S MAXIMUM POWER TOUCHFLING
+-- ABSOLUTE MAXIMUM POWER WITH MULTIPLE MODES
+-- Place in StarterPlayer → StarterPlayerScripts
 
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
 
--- Instances:
-
+-- GUI
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Frame_2 = Instance.new("Frame")
@@ -14,8 +17,11 @@ local TextButton = Instance.new("TextButton")
 local PowerLabel = Instance.new("TextLabel")
 local WarningLabel = Instance.new("TextLabel")
 local KillCounter = Instance.new("TextLabel")
-local AutoFlingToggle = Instance.new("TextButton")
-local TargetLabel = Instance.new("TextLabel")
+local ModeFrame = Instance.new("Frame")
+local ModeTitle = Instance.new("TextLabel")
+local NormalBtn = Instance.new("TextButton")
+local UltraBtn = Instance.new("TextButton")
+local MaxBtn = Instance.new("TextButton")
 
 --Properties:
 
@@ -28,7 +34,7 @@ Frame.BackgroundColor3 = Color3.fromRGB(10, 0, 0)
 Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
 Frame.BorderSizePixel = 3
 Frame.Position = UDim2.new(0.388539821, 0, 0.427821517, 0)
-Frame.Size = UDim2.new(0, 200, 0, 250)
+Frame.Size = UDim2.new(0, 220, 0, 280)
 Frame.Active = true
 Frame.Draggable = true
 
@@ -45,7 +51,7 @@ Frame_2.Parent = Frame
 Frame_2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame_2.BorderSizePixel = 0
-Frame_2.Size = UDim2.new(0, 200, 0, 35)
+Frame_2.Size = UDim2.new(0, 220, 0, 40)
 
 local HeaderCorner = Instance.new("UICorner")
 HeaderCorner.CornerRadius = UDim.new(0, 12)
@@ -68,7 +74,7 @@ TextLabel.Size = UDim2.new(0.95, 0, 1, 0)
 TextLabel.Font = Enum.Font.GothamBold
 TextLabel.Text = "Super's Ultimate Touchfling"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextSize = 13.000
+TextLabel.TextSize = 14.000
 TextLabel.TextScaled = true
 
 PowerLabel.Parent = Frame
@@ -81,69 +87,98 @@ PowerLabel.Size = UDim2.new(0.85, 0, 0, 28)
 PowerLabel.Font = Enum.Font.GothamBold
 PowerLabel.Text = "⚡ POWER: 50,000,000 ⚡"
 PowerLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
-PowerLabel.TextSize = 14.000
+PowerLabel.TextSize = 15.000
 
 WarningLabel.Parent = Frame
 WarningLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 WarningLabel.BackgroundTransparency = 1.000
 WarningLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 WarningLabel.BorderSizePixel = 0
-WarningLabel.Position = UDim2.new(0.075, 0, 0.28, 0)
+WarningLabel.Position = UDim2.new(0.075, 0, 0.26, 0)
 WarningLabel.Size = UDim2.new(0.85, 0, 0, 22)
 WarningLabel.Font = Enum.Font.SourceSansBold
-WarningLabel.Text = "🔥 MAXIMUM LEVEL 🔥"
+WarningLabel.Text = "🔥 NORMAL MODE 🔥"
 WarningLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
-WarningLabel.TextSize = 13.000
+WarningLabel.TextSize = 14.000
+
+-- Mode Selection Frame
+ModeFrame.Parent = Frame
+ModeFrame.BackgroundColor3 = Color3.fromRGB(25, 0, 0)
+ModeFrame.BorderSizePixel = 0
+ModeFrame.Position = UDim2.new(0.075, 0, 0.36, 0)
+ModeFrame.Size = UDim2.new(0.85, 0, 0, 90)
+
+local ModeCorner = Instance.new("UICorner")
+ModeCorner.CornerRadius = UDim.new(0, 8)
+ModeCorner.Parent = ModeFrame
+
+ModeTitle.Parent = ModeFrame
+ModeTitle.BackgroundTransparency = 1
+ModeTitle.Position = UDim2.new(0, 0, 0, 3)
+ModeTitle.Size = UDim2.new(1, 0, 0, 18)
+ModeTitle.Font = Enum.Font.GothamBold
+ModeTitle.Text = "SELECT POWER MODE"
+ModeTitle.TextColor3 = Color3.fromRGB(255, 200, 200)
+ModeTitle.TextSize = 11
+
+NormalBtn.Parent = ModeFrame
+NormalBtn.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+NormalBtn.Position = UDim2.new(0.05, 0, 0.28, 0)
+NormalBtn.Size = UDim2.new(0.9, 0, 0, 18)
+NormalBtn.Font = Enum.Font.Gotham
+NormalBtn.Text = "🔥 NORMAL (50M)"
+NormalBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+NormalBtn.TextSize = 10
+local NormalCorner = Instance.new("UICorner")
+NormalCorner.CornerRadius = UDim.new(0, 5)
+NormalCorner.Parent = NormalBtn
+
+UltraBtn.Parent = ModeFrame
+UltraBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 100)
+UltraBtn.Position = UDim2.new(0.05, 0, 0.53, 0)
+UltraBtn.Size = UDim2.new(0.9, 0, 0, 18)
+UltraBtn.Font = Enum.Font.Gotham
+UltraBtn.Text = "💥 ULTRA (100M)"
+UltraBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+UltraBtn.TextSize = 10
+local UltraCorner = Instance.new("UICorner")
+UltraCorner.CornerRadius = UDim.new(0, 5)
+UltraCorner.Parent = UltraBtn
+
+MaxBtn.Parent = ModeFrame
+MaxBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 150)
+MaxBtn.Position = UDim2.new(0.05, 0, 0.78, 0)
+MaxBtn.Size = UDim2.new(0.9, 0, 0, 18)
+MaxBtn.Font = Enum.Font.GothamBold
+MaxBtn.Text = "⚡ MAXIMUM (200M)"
+MaxBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+MaxBtn.TextSize = 10
+local MaxCorner = Instance.new("UICorner")
+MaxCorner.CornerRadius = UDim.new(0, 5)
+MaxCorner.Parent = MaxBtn
 
 KillCounter.Parent = Frame
 KillCounter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 KillCounter.BackgroundTransparency = 1.000
 KillCounter.BorderColor3 = Color3.fromRGB(0, 0, 0)
 KillCounter.BorderSizePixel = 0
-KillCounter.Position = UDim2.new(0.075, 0, 0.40, 0)
-KillCounter.Size = UDim2.new(0.85, 0, 0, 18)
+KillCounter.Position = UDim2.new(0.075, 0, 0.68, 0)
+KillCounter.Size = UDim2.new(0.85, 0, 0, 20)
 KillCounter.Font = Enum.Font.Gotham
 KillCounter.Text = "💀 Eliminated: 0"
 KillCounter.TextColor3 = Color3.fromRGB(200, 200, 200)
-KillCounter.TextSize = 12.000
-
-TargetLabel.Parent = Frame
-TargetLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TargetLabel.BackgroundTransparency = 1.000
-TargetLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TargetLabel.BorderSizePixel = 0
-TargetLabel.Position = UDim2.new(0.075, 0, 0.50, 0)
-TargetLabel.Size = UDim2.new(0.85, 0, 0, 18)
-TargetLabel.Font = Enum.Font.Gotham
-TargetLabel.Text = "🎯 Target: None"
-TargetLabel.TextColor3 = Color3.fromRGB(255, 150, 150)
-TargetLabel.TextSize = 11.000
-
-AutoFlingToggle.Parent = Frame
-AutoFlingToggle.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-AutoFlingToggle.BorderColor3 = Color3.fromRGB(255, 255, 255)
-AutoFlingToggle.BorderSizePixel = 0
-AutoFlingToggle.Position = UDim2.new(0.1, 0, 0.62, 0)
-AutoFlingToggle.Size = UDim2.new(0, 160, 0, 32)
-AutoFlingToggle.Font = Enum.Font.GothamBold
-AutoFlingToggle.Text = "AUTO FLING: OFF"
-AutoFlingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-AutoFlingToggle.TextSize = 14.000
-
-local AutoCorner = Instance.new("UICorner")
-AutoCorner.CornerRadius = UDim.new(0, 8)
-AutoCorner.Parent = AutoFlingToggle
+KillCounter.TextSize = 13.000
 
 TextButton.Parent = Frame
 TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.1, 0, 0.78, 0)
-TextButton.Size = UDim2.new(0, 160, 0, 45)
+TextButton.Position = UDim2.new(0.125, 0, 0.78, 0)
+TextButton.Size = UDim2.new(0, 165, 0, 50)
 TextButton.Font = Enum.Font.GothamBold
 TextButton.Text = "OFF"
 TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextSize = 24.000
+TextButton.TextSize = 26.000
 
 local ButtonCorner = Instance.new("UICorner")
 ButtonCorner.CornerRadius = UDim.new(0, 10)
@@ -156,28 +191,91 @@ ButtonGradient.Parent = TextButton
 
 -- Scripts:
 
-local function UltimateFlingScript()
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local RunService = game:GetService("RunService")
-	local Players = game:GetService("Players")
-	
+local function MaximumPowerFlingScript()
 	local toggleButton = TextButton
-	local autoFlingButton = AutoFlingToggle
 	local hiddenfling = false
-	local autoFlingEnabled = false
-	local flingThread
-	local autoFlingThread
+	local flingThread 
 	local killCount = 0
-	local currentTarget = nil
+	local currentMode = "NORMAL"
 	
-	-- 50 MILLION POWER SETTING
-	local FLING_POWER = 50000000
+	-- Power settings per mode
+	local FLING_POWERS = {
+		NORMAL = 50000000,
+		ULTRA = 100000000,
+		MAXIMUM = 200000000
+	}
+	
+	local currentPower = FLING_POWERS.NORMAL
+	
+	-- FX Folder
+	local FXFolder = Instance.new("Folder", workspace)
+	FXFolder.Name = "MaxPowerFlingFX"
 	
 	-- Create detection marker
-	if not ReplicatedStorage:FindFirstChild("SuperFling_50M_AUTO") then
+	if not ReplicatedStorage:FindFirstChild("SuperFling_MAX") then
 		local detection = Instance.new("Decal")
-		detection.Name = "SuperFling_50M_AUTO"
+		detection.Name = "SuperFling_MAX"
 		detection.Parent = ReplicatedStorage
+	end
+	
+	-- Visual effects for activation
+	local function createActivationEffect()
+		local effectColor
+		if currentMode == "MAXIMUM" then
+			effectColor = Color3.fromRGB(255, 0, 255)
+		elseif currentMode == "ULTRA" then
+			effectColor = Color3.fromRGB(255, 50, 150)
+		else
+			effectColor = Color3.fromRGB(255, 100, 100)
+		end
+		
+		local player = Players.LocalPlayer
+		local char = player.Character
+		if not char then return end
+		local root = char:FindFirstChild("HumanoidRootPart")
+		if not root then return end
+		
+		-- Explosion effect
+		for i = 1, 12 do
+			local part = Instance.new("Part")
+			part.Size = Vector3.new(2, 2, 2)
+			part.Position = root.Position
+			part.Anchored = true
+			part.CanCollide = false
+			part.Material = Enum.Material.Neon
+			part.Color = effectColor
+			part.Transparency = 0.3
+			part.Shape = Enum.PartType.Ball
+			part.Parent = FXFolder
+			
+			local angle = (i / 12) * math.pi * 2
+			local targetPos = root.Position + Vector3.new(math.cos(angle) * 10, math.random(-3, 3), math.sin(angle) * 10)
+			
+			TweenService:Create(part, TweenInfo.new(0.5), {
+				Position = targetPos,
+				Size = Vector3.new(0.5, 0.5, 0.5),
+				Transparency = 1
+			}):Play()
+			Debris:AddItem(part, 0.5)
+		end
+		
+		-- Shockwave
+		local shockwave = Instance.new("Part")
+		shockwave.Size = Vector3.new(1, 1, 1)
+		shockwave.Position = root.Position
+		shockwave.Anchored = true
+		shockwave.CanCollide = false
+		shockwave.Material = Enum.Material.Neon
+		shockwave.Color = effectColor
+		shockwave.Transparency = 0.5
+		shockwave.Shape = Enum.PartType.Ball
+		shockwave.Parent = FXFolder
+		
+		TweenService:Create(shockwave, TweenInfo.new(0.6), {
+			Size = Vector3.new(30, 30, 30),
+			Transparency = 1
+		}):Play()
+		Debris:AddItem(shockwave, 0.6)
 	end
 	
 	-- Track eliminations
@@ -185,56 +283,23 @@ local function UltimateFlingScript()
 		killCount = killCount + 1
 		KillCounter.Text = "💀 Eliminated: " .. killCount
 		
-		-- Flash counter
-		KillCounter.TextColor3 = Color3.fromRGB(255, 0, 0)
-		wait(0.1)
-		KillCounter.TextColor3 = Color3.fromRGB(200, 200, 200)
-	end
-	
-	-- Create FTL teleport effect
-	local function createTeleportEffect(position)
-		local effect = Instance.new("Part")
-		effect.Size = Vector3.new(8, 8, 8)
-		effect.Position = position
-		effect.Anchored = true
-		effect.CanCollide = false
-		effect.Material = Enum.Material.Neon
-		effect.Color = Color3.fromRGB(255, 0, 0)
-		effect.Transparency = 0.3
-		effect.Shape = Enum.PartType.Ball
-		effect.Parent = workspace
-		
-		-- Lightning burst
-		for i = 1, 12 do
-			local lightning = Instance.new("Part")
-			lightning.Size = Vector3.new(0.5, 8, 0.5)
-			lightning.Anchored = true
-			lightning.CanCollide = false
-			lightning.Material = Enum.Material.Neon
-			lightning.Color = Color3.fromRGB(255, 255, 0)
-			lightning.Parent = workspace
-			
-			local angle = (i / 12) * math.pi * 2
-			lightning.CFrame = CFrame.new(position) * CFrame.Angles(0, angle, math.rad(45)) * CFrame.new(0, 0, 4)
-			
-			TweenService:Create(lightning, TweenInfo.new(0.2), {
-				Transparency = 1,
-				Size = Vector3.new(0.2, 12, 0.2)
-			}):Play()
-			Debris:AddItem(lightning, 0.2)
-		end
-		
-		TweenService:Create(effect, TweenInfo.new(0.3), {
-			Size = Vector3.new(16, 16, 16),
-			Transparency = 1
-		}):Play()
-		Debris:AddItem(effect, 0.3)
+		-- Epic flash effect
+		spawn(function()
+			for i = 1, 3 do
+				KillCounter.TextColor3 = Color3.fromRGB(255, 0, 0)
+				KillCounter.TextSize = 16
+				wait(0.1)
+				KillCounter.TextColor3 = Color3.fromRGB(200, 200, 200)
+				KillCounter.TextSize = 13
+				wait(0.1)
+			end
+		end)
 	end
 	
 	-- Monitor nearby players for elimination tracking
 	local function monitorPlayers()
 		while hiddenfling do
-			wait(0.5)
+			wait(0.3)
 			for _, player in pairs(Players:GetPlayers()) do
 				if player ~= Players.LocalPlayer and player.Character then
 					local theirRoot = player.Character:FindFirstChild("HumanoidRootPart")
@@ -242,78 +307,12 @@ local function UltimateFlingScript()
 					
 					if theirRoot and myRoot then
 						local distance = (theirRoot.Position - myRoot.Position).Magnitude
-						if distance < 20 and theirRoot.Velocity.Magnitude > 10000 then
+						-- If they were close and now have extreme velocity, they got flung
+						if distance < 25 and theirRoot.Velocity.Magnitude > 50000 then
 							trackElimination()
 						end
 					end
 				end
-			end
-		end
-	end
-	
-	-- AUTO FLING SYSTEM
-	local function autoFling()
-		while autoFlingEnabled do
-			wait(0.1)
-			
-			if not hiddenfling then
-				wait(1)
-				continue
-			end
-			
-			-- Find nearest player
-			local nearestPlayer = nil
-			local nearestDistance = math.huge
-			local myChar = Players.LocalPlayer.Character
-			local myRoot = myChar and myChar:FindFirstChild("HumanoidRootPart")
-			
-			if not myRoot then
-				wait(1)
-				continue
-			end
-			
-			for _, player in pairs(Players:GetPlayers()) do
-				if player ~= Players.LocalPlayer and player.Character then
-					local theirRoot = player.Character:FindFirstChild("HumanoidRootPart")
-					if theirRoot then
-						local distance = (theirRoot.Position - myRoot.Position).Magnitude
-						if distance < nearestDistance and distance > 5 then -- Don't target if too close
-							nearestDistance = distance
-							nearestPlayer = player
-						end
-					end
-				end
-			end
-			
-			-- Teleport to target and fling
-			if nearestPlayer and nearestPlayer.Character then
-				local theirRoot = nearestPlayer.Character:FindFirstChild("HumanoidRootPart")
-				if theirRoot then
-					currentTarget = nearestPlayer.Name
-					TargetLabel.Text = "🎯 Target: " .. currentTarget
-					TargetLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
-					
-					-- FTL TELEPORT
-					local targetPos = theirRoot.Position + Vector3.new(0, 2, 0)
-					createTeleportEffect(myRoot.Position) -- Departure effect
-					
-					myRoot.CFrame = CFrame.new(targetPos)
-					
-					createTeleportEffect(targetPos) -- Arrival effect
-					
-					-- Wait for fling to apply
-					wait(0.3)
-					
-					-- Flash on successful fling
-					Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
-					wait(0.1)
-					Frame_2.BackgroundColor3 = Color3.fromRGB(255, 50, 0)
-					
-					TargetLabel.TextColor3 = Color3.fromRGB(255, 150, 150)
-				end
-			else
-				currentTarget = nil
-				TargetLabel.Text = "🎯 Target: None"
 			end
 		end
 	end
@@ -329,8 +328,8 @@ local function UltimateFlingScript()
 	
 			if hrp then
 				vel = hrp.Velocity
-				-- 50 MILLION POWER
-				hrp.Velocity = vel * FLING_POWER + Vector3.new(0, FLING_POWER, 0)
+				-- Use current power level
+				hrp.Velocity = vel * currentPower + Vector3.new(0, currentPower, 0)
 				RunService.RenderStepped:Wait()
 				hrp.Velocity = vel
 				RunService.Stepped:Wait()
@@ -340,51 +339,101 @@ local function UltimateFlingScript()
 		end
 	end
 	
-	-- Auto fling toggle
-	autoFlingButton.Activated:Connect(function()
-		autoFlingEnabled = not autoFlingEnabled
-		
-		if autoFlingEnabled then
-			autoFlingButton.Text = "AUTO FLING: ON"
-			autoFlingButton.BackgroundColor3 = Color3.fromRGB(255, 100, 0)
-			autoFlingThread = coroutine.create(autoFling)
-			coroutine.resume(autoFlingThread)
-		else
-			autoFlingButton.Text = "AUTO FLING: OFF"
-			autoFlingButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-			autoFlingEnabled = false
-			currentTarget = nil
-			TargetLabel.Text = "🎯 Target: None"
+	-- Mode selection
+	NormalBtn.MouseButton1Click:Connect(function()
+		currentMode = "NORMAL"
+		currentPower = FLING_POWERS.NORMAL
+		PowerLabel.Text = "⚡ POWER: 50,000,000 ⚡"
+		PowerLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+		WarningLabel.Text = "🔥 NORMAL MODE 🔥"
+		WarningLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+		Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+		if hiddenfling then
+			createActivationEffect()
 		end
 	end)
 	
-	-- Main fling toggle
-	toggleButton.Activated:Connect(function()
+	UltraBtn.MouseButton1Click:Connect(function()
+		currentMode = "ULTRA"
+		currentPower = FLING_POWERS.ULTRA
+		PowerLabel.Text = "⚡ POWER: 100,000,000 ⚡"
+		PowerLabel.TextColor3 = Color3.fromRGB(255, 100, 255)
+		WarningLabel.Text = "💥 ULTRA MODE 💥"
+		WarningLabel.TextColor3 = Color3.fromRGB(255, 50, 150)
+		Frame.BorderColor3 = Color3.fromRGB(255, 0, 150)
+		if hiddenfling then
+			createActivationEffect()
+		end
+	end)
+	
+	MaxBtn.MouseButton1Click:Connect(function()
+		currentMode = "MAXIMUM"
+		currentPower = FLING_POWERS.MAXIMUM
+		PowerLabel.Text = "⚡ POWER: 200,000,000 ⚡"
+		PowerLabel.TextColor3 = Color3.fromRGB(255, 0, 255)
+		WarningLabel.Text = "⚡ MAXIMUM MODE ⚡"
+		WarningLabel.TextColor3 = Color3.fromRGB(255, 0, 255)
+		Frame.BorderColor3 = Color3.fromRGB(255, 0, 255)
+		if hiddenfling then
+			createActivationEffect()
+		end
+	end)
+	
+	-- Main toggle
+	toggleButton.MouseButton1Click:Connect(function()
 		hiddenfling = not hiddenfling
 		
 		if hiddenfling then
 			toggleButton.Text = "ON"
 			toggleButton.BackgroundColor3 = Color3.fromRGB(100, 255, 100)
-			Frame_2.BackgroundColor3 = Color3.fromRGB(255, 50, 0)
-			HeaderCover.BackgroundColor3 = Color3.fromRGB(255, 50, 0)
+			toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			
-			-- Pulse effect when active
-			spawn(function()
-				while hiddenfling do
-					for i = 1, 10 do
-						Frame.BorderColor3 = Color3.fromRGB(255, i * 25, 0)
-						wait(0.05)
+			local headerColor
+			if currentMode == "MAXIMUM" then
+				headerColor = Color3.fromRGB(255, 0, 255)
+			elseif currentMode == "ULTRA" then
+				headerColor = Color3.fromRGB(255, 50, 150)
+			else
+				headerColor = Color3.fromRGB(255, 0, 0)
+			end
+			Frame_2.BackgroundColor3 = headerColor
+			HeaderCover.BackgroundColor3 = headerColor
+			
+			createActivationEffect()
+			
+			-- RGB border effect for MAXIMUM mode
+			if currentMode == "MAXIMUM" then
+				spawn(function()
+					while hiddenfling do
+						for hue = 0, 360, 10 do
+							if not hiddenfling then break end
+							local color = Color3.fromHSV(hue / 360, 1, 1)
+							Frame.BorderColor3 = color
+							PowerLabel.TextColor3 = color
+							wait(0.05)
+						end
 					end
-					for i = 10, 1, -1 do
-						Frame.BorderColor3 = Color3.fromRGB(255, i * 25, 0)
-						wait(0.05)
+				end)
+			else
+				-- Pulse effect for other modes
+				spawn(function()
+					while hiddenfling do
+						for i = 1, 10 do
+							if not hiddenfling then break end
+							Frame.BorderColor3 = Color3.fromRGB(255, i * 25, i * (currentMode == "ULTRA" and 15 or 0))
+							wait(0.05)
+						end
+						for i = 10, 1, -1 do
+							if not hiddenfling then break end
+							Frame.BorderColor3 = Color3.fromRGB(255, i * 25, i * (currentMode == "ULTRA" and 15 or 0))
+							wait(0.05)
+						end
 					end
-				end
-			end)
+				end)
+			end
 			
 			flingThread = coroutine.create(fling)
 			coroutine.resume(flingThread)
-			
 			spawn(monitorPlayers)
 		else
 			toggleButton.Text = "OFF"
@@ -392,19 +441,38 @@ local function UltimateFlingScript()
 			toggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Frame_2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 			HeaderCover.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-			Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
-			PowerLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+			
+			local borderColor
+			if currentMode == "MAXIMUM" then
+				borderColor = Color3.fromRGB(255, 0, 255)
+			elseif currentMode == "ULTRA" then
+				borderColor = Color3.fromRGB(255, 0, 150)
+			else
+				borderColor = Color3.fromRGB(255, 0, 0)
+			end
+			Frame.BorderColor3 = borderColor
+			
+			local powerColor
+			if currentMode == "MAXIMUM" then
+				powerColor = Color3.fromRGB(255, 0, 255)
+			elseif currentMode == "ULTRA" then
+				powerColor = Color3.fromRGB(255, 100, 255)
+			else
+				powerColor = Color3.fromRGB(255, 255, 0)
+			end
+			PowerLabel.TextColor3 = powerColor
+			
 			hiddenfling = false
 		end
 	end)
 	
 end
 
-coroutine.wrap(UltimateFlingScript)()
+coroutine.wrap(MaximumPowerFlingScript)()
 
-print("🔥💀 SUPER'S ULTIMATE TOUCHFLING + AUTO FLING 💀🔥")
-print("⚡ POWER: 50,000,000 (ABSOLUTE MAXIMUM) ⚡")
-print("🎯 AUTO FLING: FTL teleport to nearest player")
-print("💀 AUTO TARGET & ELIMINATE")
-print("Drag GUI to move it around")
-print("Toggle AUTO FLING then enable main fling!")
+print("🔥💀⚡ SUPER'S MAXIMUM POWER TOUCHFLING LOADED ⚡💀🔥")
+print("⚡ 3 POWER MODES: NORMAL (50M), ULTRA (100M), MAXIMUM (200M)")
+print("💥 Visual effects on activation")
+print("💀 Elimination tracking")
+print("🌈 RGB border in MAXIMUM mode")
+print("Select mode then toggle ON!")
