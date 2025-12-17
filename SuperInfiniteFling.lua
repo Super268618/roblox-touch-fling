@@ -1,5 +1,4 @@
--- SUPER'S MAXIMUM POWER TOUCHFLING
--- ABSOLUTE MAXIMUM POWER WITH MULTIPLE MODES
+-- SUPER'S MAXIMUM POWER TOUCHFLING -- ABSOLUTE MAXIMUM POWER WITH MULTIPLE MODES --
 -- Place in StarterPlayer → StarterPlayerScripts
 
 local TweenService = game:GetService("TweenService")
@@ -22,9 +21,10 @@ local ModeTitle = Instance.new("TextLabel")
 local NormalBtn = Instance.new("TextButton")
 local UltraBtn = Instance.new("TextButton")
 local MaxBtn = Instance.new("TextButton")
+local MegaBtn = Instance.new("TextButton")  -- New 500M mode
+local GodBtn = Instance.new("TextButton")   -- New 1B mode
 
---Properties:
-
+-- Properties
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.ResetOnSpawn = false
@@ -34,7 +34,7 @@ Frame.BackgroundColor3 = Color3.fromRGB(10, 0, 0)
 Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
 Frame.BorderSizePixel = 3
 Frame.Position = UDim2.new(0.388539821, 0, 0.427821517, 0)
-Frame.Size = UDim2.new(0, 220, 0, 280)
+Frame.Size = UDim2.new(0, 220, 0, 320) -- Increased height
 Frame.Active = true
 Frame.Draggable = true
 
@@ -106,7 +106,7 @@ ModeFrame.Parent = Frame
 ModeFrame.BackgroundColor3 = Color3.fromRGB(25, 0, 0)
 ModeFrame.BorderSizePixel = 0
 ModeFrame.Position = UDim2.new(0.075, 0, 0.36, 0)
-ModeFrame.Size = UDim2.new(0.85, 0, 0, 90)
+ModeFrame.Size = UDim2.new(0.85, 0, 0, 125) -- Increased height
 
 local ModeCorner = Instance.new("UICorner")
 ModeCorner.CornerRadius = UDim.new(0, 8)
@@ -123,46 +123,77 @@ ModeTitle.TextSize = 11
 
 NormalBtn.Parent = ModeFrame
 NormalBtn.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
-NormalBtn.Position = UDim2.new(0.05, 0, 0.28, 0)
-NormalBtn.Size = UDim2.new(0.9, 0, 0, 18)
+NormalBtn.Position = UDim2.new(0.05, 0, 0.25, 0)
+NormalBtn.Size = UDim2.new(0.9, 0, 0, 16)
 NormalBtn.Font = Enum.Font.Gotham
 NormalBtn.Text = "🔥 NORMAL (50M)"
 NormalBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 NormalBtn.TextSize = 10
+
 local NormalCorner = Instance.new("UICorner")
 NormalCorner.CornerRadius = UDim.new(0, 5)
 NormalCorner.Parent = NormalBtn
 
 UltraBtn.Parent = ModeFrame
 UltraBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 100)
-UltraBtn.Position = UDim2.new(0.05, 0, 0.53, 0)
-UltraBtn.Size = UDim2.new(0.9, 0, 0, 18)
+UltraBtn.Position = UDim2.new(0.05, 0, 0.40, 0)
+UltraBtn.Size = UDim2.new(0.9, 0, 0, 16)
 UltraBtn.Font = Enum.Font.Gotham
 UltraBtn.Text = "💥 ULTRA (100M)"
 UltraBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 UltraBtn.TextSize = 10
+
 local UltraCorner = Instance.new("UICorner")
 UltraCorner.CornerRadius = UDim.new(0, 5)
 UltraCorner.Parent = UltraBtn
 
 MaxBtn.Parent = ModeFrame
 MaxBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 150)
-MaxBtn.Position = UDim2.new(0.05, 0, 0.78, 0)
-MaxBtn.Size = UDim2.new(0.9, 0, 0, 18)
+MaxBtn.Position = UDim2.new(0.05, 0, 0.55, 0)
+MaxBtn.Size = UDim2.new(0.9, 0, 0, 16)
 MaxBtn.Font = Enum.Font.GothamBold
 MaxBtn.Text = "⚡ MAXIMUM (200M)"
 MaxBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 MaxBtn.TextSize = 10
+
 local MaxCorner = Instance.new("UICorner")
 MaxCorner.CornerRadius = UDim.new(0, 5)
 MaxCorner.Parent = MaxBtn
+
+-- NEW: 500M Mega Mode
+MegaBtn.Parent = ModeFrame
+MegaBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 0)
+MegaBtn.Position = UDim2.new(0.05, 0, 0.70, 0)
+MegaBtn.Size = UDim2.new(0.9, 0, 0, 16)
+MegaBtn.Font = Enum.Font.GothamBold
+MegaBtn.Text = "🌋 MEGA (500M)"
+MegaBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+MegaBtn.TextSize = 10
+
+local MegaCorner = Instance.new("UICorner")
+MegaCorner.CornerRadius = UDim.new(0, 5)
+MegaCorner.Parent = MegaBtn
+
+-- NEW: 1B God Mode
+GodBtn.Parent = ModeFrame
+GodBtn.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
+GodBtn.Position = UDim2.new(0.05, 0, 0.85, 0)
+GodBtn.Size = UDim2.new(0.9, 0, 0, 16)
+GodBtn.Font = Enum.Font.GothamBold
+GodBtn.Text = "👑 GOD MODE (1B)"
+GodBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+GodBtn.TextSize = 10
+
+local GodCorner = Instance.new("UICorner")
+GodCorner.CornerRadius = UDim.new(0, 5)
+GodCorner.Parent = GodBtn
 
 KillCounter.Parent = Frame
 KillCounter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 KillCounter.BackgroundTransparency = 1.000
 KillCounter.BorderColor3 = Color3.fromRGB(0, 0, 0)
 KillCounter.BorderSizePixel = 0
-KillCounter.Position = UDim2.new(0.075, 0, 0.68, 0)
+KillCounter.Position = UDim2.new(0.075, 0, 0.75, 0) -- Adjusted position
 KillCounter.Size = UDim2.new(0.85, 0, 0, 20)
 KillCounter.Font = Enum.Font.Gotham
 KillCounter.Text = "💀 Eliminated: 0"
@@ -173,7 +204,7 @@ TextButton.Parent = Frame
 TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.125, 0, 0.78, 0)
+TextButton.Position = UDim2.new(0.125, 0, 0.85, 0) -- Adjusted position
 TextButton.Size = UDim2.new(0, 165, 0, 50)
 TextButton.Font = Enum.Font.GothamBold
 TextButton.Text = "OFF"
@@ -190,19 +221,20 @@ ButtonGradient.Rotation = 90
 ButtonGradient.Parent = TextButton
 
 -- Scripts:
-
 local function MaximumPowerFlingScript()
 	local toggleButton = TextButton
 	local hiddenfling = false
-	local flingThread 
+	local flingThread
 	local killCount = 0
 	local currentMode = "NORMAL"
 	
-	-- Power settings per mode
+	-- Power settings per mode (UPDATED WITH NEW MODES)
 	local FLING_POWERS = {
 		NORMAL = 50000000,
 		ULTRA = 100000000,
-		MAXIMUM = 200000000
+		MAXIMUM = 200000000,
+		MEGA = 500000000,      -- New 500M mode
+		GOD = 1000000000       -- New 1B mode
 	}
 	
 	local currentPower = FLING_POWERS.NORMAL
@@ -221,12 +253,16 @@ local function MaximumPowerFlingScript()
 	-- Visual effects for activation
 	local function createActivationEffect()
 		local effectColor
-		if currentMode == "MAXIMUM" then
-			effectColor = Color3.fromRGB(255, 0, 255)
+		if currentMode == "GOD" then
+			effectColor = Color3.fromRGB(255, 215, 0) -- Gold
+		elseif currentMode == "MEGA" then
+			effectColor = Color3.fromRGB(255, 100, 0) -- Orange
+		elseif currentMode == "MAXIMUM" then
+			effectColor = Color3.fromRGB(255, 0, 255) -- Purple
 		elseif currentMode == "ULTRA" then
-			effectColor = Color3.fromRGB(255, 50, 150)
+			effectColor = Color3.fromRGB(255, 50, 150) -- Pink
 		else
-			effectColor = Color3.fromRGB(255, 100, 100)
+			effectColor = Color3.fromRGB(255, 100, 100) -- Red
 		end
 		
 		local player = Players.LocalPlayer
@@ -235,8 +271,19 @@ local function MaximumPowerFlingScript()
 		local root = char:FindFirstChild("HumanoidRootPart")
 		if not root then return end
 		
-		-- Explosion effect
-		for i = 1, 12 do
+		-- Enhanced explosion effect for higher modes
+		local particleCount = 12
+		local explosionSize = 10
+		
+		if currentMode == "MEGA" then
+			particleCount = 20
+			explosionSize = 15
+		elseif currentMode == "GOD" then
+			particleCount = 30
+			explosionSize = 20
+		end
+		
+		for i = 1, particleCount do
 			local part = Instance.new("Part")
 			part.Size = Vector3.new(2, 2, 2)
 			part.Position = root.Position
@@ -248,8 +295,8 @@ local function MaximumPowerFlingScript()
 			part.Shape = Enum.PartType.Ball
 			part.Parent = FXFolder
 			
-			local angle = (i / 12) * math.pi * 2
-			local targetPos = root.Position + Vector3.new(math.cos(angle) * 10, math.random(-3, 3), math.sin(angle) * 10)
+			local angle = (i / particleCount) * math.pi * 2
+			local targetPos = root.Position + Vector3.new(math.cos(angle) * explosionSize, math.random(-3, 3), math.sin(angle) * explosionSize)
 			
 			TweenService:Create(part, TweenInfo.new(0.5), {
 				Position = targetPos,
@@ -271,11 +318,41 @@ local function MaximumPowerFlingScript()
 		shockwave.Shape = Enum.PartType.Ball
 		shockwave.Parent = FXFolder
 		
+		local targetSize = 30
+		if currentMode == "MEGA" then targetSize = 40 end
+		if currentMode == "GOD" then targetSize = 50 end
+		
 		TweenService:Create(shockwave, TweenInfo.new(0.6), {
-			Size = Vector3.new(30, 30, 30),
+			Size = Vector3.new(targetSize, targetSize, targetSize),
 			Transparency = 1
 		}):Play()
 		Debris:AddItem(shockwave, 0.6)
+		
+		-- Special effects for GOD mode
+		if currentMode == "GOD" then
+			-- Create a crown effect
+			spawn(function()
+				for i = 1, 5 do
+					local crownPart = Instance.new("Part")
+					crownPart.Size = Vector3.new(3, 0.5, 3)
+					crownPart.Position = root.Position + Vector3.new(0, 3, 0)
+					crownPart.Anchored = true
+					crownPart.CanCollide = false
+					crownPart.Material = Enum.Material.Neon
+					crownPart.Color = Color3.fromRGB(255, 215, 0)
+					crownPart.Parent = FXFolder
+					
+					local angle = (i / 5) * math.pi * 2
+					TweenService:Create(crownPart, TweenInfo.new(0.8), {
+						Position = root.Position + Vector3.new(math.cos(angle) * 4, 5, math.sin(angle) * 4),
+						Rotation = Vector3.new(0, math.deg(angle), 0),
+						Transparency = 1
+					}):Play()
+					Debris:AddItem(crownPart, 0.8)
+					wait(0.1)
+				end
+			end)
+		end
 	end
 	
 	-- Track eliminations
@@ -320,12 +397,12 @@ local function MaximumPowerFlingScript()
 	local function fling()
 		local lp = Players.LocalPlayer
 		local c, hrp, vel, movel = nil, nil, nil, 0.1
-	
+		
 		while hiddenfling do
 			RunService.Heartbeat:Wait()
 			c = lp.Character
 			hrp = c and c:FindFirstChild("HumanoidRootPart")
-	
+			
 			if hrp then
 				vel = hrp.Velocity
 				-- Use current power level
@@ -379,6 +456,34 @@ local function MaximumPowerFlingScript()
 		end
 	end)
 	
+	-- NEW: 500M Mega Mode
+	MegaBtn.MouseButton1Click:Connect(function()
+		currentMode = "MEGA"
+		currentPower = FLING_POWERS.MEGA
+		PowerLabel.Text = "🌋 POWER: 500,000,000 🌋"
+		PowerLabel.TextColor3 = Color3.fromRGB(255, 100, 0)
+		WarningLabel.Text = "🌋 MEGA MODE 🌋"
+		WarningLabel.TextColor3 = Color3.fromRGB(255, 100, 0)
+		Frame.BorderColor3 = Color3.fromRGB(255, 100, 0)
+		if hiddenfling then
+			createActivationEffect()
+		end
+	end)
+	
+	-- NEW: 1B God Mode
+	GodBtn.MouseButton1Click:Connect(function()
+		currentMode = "GOD"
+		currentPower = FLING_POWERS.GOD
+		PowerLabel.Text = "👑 POWER: 1,000,000,000 👑"
+		PowerLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+		WarningLabel.Text = "👑 GOD MODE 👑"
+		WarningLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+		Frame.BorderColor3 = Color3.fromRGB(255, 215, 0)
+		if hiddenfling then
+			createActivationEffect()
+		end
+	end)
+	
 	-- Main toggle
 	toggleButton.MouseButton1Click:Connect(function()
 		hiddenfling = not hiddenfling
@@ -389,7 +494,11 @@ local function MaximumPowerFlingScript()
 			toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			
 			local headerColor
-			if currentMode == "MAXIMUM" then
+			if currentMode == "GOD" then
+				headerColor = Color3.fromRGB(255, 215, 0)
+			elseif currentMode == "MEGA" then
+				headerColor = Color3.fromRGB(255, 100, 0)
+			elseif currentMode == "MAXIMUM" then
 				headerColor = Color3.fromRGB(255, 0, 255)
 			elseif currentMode == "ULTRA" then
 				headerColor = Color3.fromRGB(255, 50, 150)
@@ -401,8 +510,35 @@ local function MaximumPowerFlingScript()
 			
 			createActivationEffect()
 			
-			-- RGB border effect for MAXIMUM mode
-			if currentMode == "MAXIMUM" then
+			-- Special border effects based on mode
+			if currentMode == "GOD" then
+				-- Gold shimmer effect for GOD mode
+				spawn(function()
+					while hiddenfling do
+						for i = 1, 20 do
+							if not hiddenfling then break end
+							local intensity = math.sin(i * 0.3) * 0.5 + 0.5
+							Frame.BorderColor3 = Color3.fromRGB(255, 215, 0):Lerp(Color3.fromRGB(255, 255, 150), intensity)
+							PowerLabel.TextColor3 = Color3.fromRGB(255, 215, 0):Lerp(Color3.fromRGB(255, 255, 150), intensity)
+							wait(0.05)
+						end
+					end
+				end)
+			elseif currentMode == "MEGA" then
+				-- Lava flow effect for MEGA mode
+				spawn(function()
+					while hiddenfling do
+						for hue = 0, 10, 1 do
+							if not hiddenfling then break end
+							local color = Color3.fromRGB(255, math.random(80, 120), 0)
+							Frame.BorderColor3 = color
+							PowerLabel.TextColor3 = color
+							wait(0.1)
+						end
+					end
+				end)
+			elseif currentMode == "MAXIMUM" then
+				-- RGB effect for MAXIMUM mode
 				spawn(function()
 					while hiddenfling do
 						for hue = 0, 360, 10 do
@@ -420,12 +556,18 @@ local function MaximumPowerFlingScript()
 					while hiddenfling do
 						for i = 1, 10 do
 							if not hiddenfling then break end
-							Frame.BorderColor3 = Color3.fromRGB(255, i * 25, i * (currentMode == "ULTRA" and 15 or 0))
+							local r = 255
+							local g = i * 25
+							local b = i * (currentMode == "ULTRA" and 15 or 0)
+							Frame.BorderColor3 = Color3.fromRGB(r, g, b)
 							wait(0.05)
 						end
 						for i = 10, 1, -1 do
 							if not hiddenfling then break end
-							Frame.BorderColor3 = Color3.fromRGB(255, i * 25, i * (currentMode == "ULTRA" and 15 or 0))
+							local r = 255
+							local g = i * 25
+							local b = i * (currentMode == "ULTRA" and 15 or 0)
+							Frame.BorderColor3 = Color3.fromRGB(r, g, b)
 							wait(0.05)
 						end
 					end
@@ -435,6 +577,14 @@ local function MaximumPowerFlingScript()
 			flingThread = coroutine.create(fling)
 			coroutine.resume(flingThread)
 			spawn(monitorPlayers)
+			
+			-- Special warning for GOD mode
+			if currentMode == "GOD" then
+				warn("⚡⚡⚡ GOD MODE ACTIVATED - UNSTOPPABLE POWER! ⚡⚡⚡")
+			elseif currentMode == "MEGA" then
+				warn("🌋🌋🌋 MEGA MODE ACTIVATED - VOLCANIC POWER! 🌋🌋🌋")
+			end
+			
 		else
 			toggleButton.Text = "OFF"
 			toggleButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -443,7 +593,11 @@ local function MaximumPowerFlingScript()
 			HeaderCover.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 			
 			local borderColor
-			if currentMode == "MAXIMUM" then
+			if currentMode == "GOD" then
+				borderColor = Color3.fromRGB(255, 215, 0)
+			elseif currentMode == "MEGA" then
+				borderColor = Color3.fromRGB(255, 100, 0)
+			elseif currentMode == "MAXIMUM" then
 				borderColor = Color3.fromRGB(255, 0, 255)
 			elseif currentMode == "ULTRA" then
 				borderColor = Color3.fromRGB(255, 0, 150)
@@ -453,7 +607,11 @@ local function MaximumPowerFlingScript()
 			Frame.BorderColor3 = borderColor
 			
 			local powerColor
-			if currentMode == "MAXIMUM" then
+			if currentMode == "GOD" then
+				powerColor = Color3.fromRGB(255, 215, 0)
+			elseif currentMode == "MEGA" then
+				powerColor = Color3.fromRGB(255, 100, 0)
+			elseif currentMode == "MAXIMUM" then
 				powerColor = Color3.fromRGB(255, 0, 255)
 			elseif currentMode == "ULTRA" then
 				powerColor = Color3.fromRGB(255, 100, 255)
@@ -465,14 +623,18 @@ local function MaximumPowerFlingScript()
 			hiddenfling = false
 		end
 	end)
-	
 end
 
 coroutine.wrap(MaximumPowerFlingScript)()
 
 print("🔥💀⚡ SUPER'S MAXIMUM POWER TOUCHFLING LOADED ⚡💀🔥")
-print("⚡ 3 POWER MODES: NORMAL (50M), ULTRA (100M), MAXIMUM (200M)")
-print("💥 Visual effects on activation")
+print("⚡ 5 POWER MODES NOW AVAILABLE:")
+print("🔥 NORMAL (50M)")
+print("💥 ULTRA (100M)")
+print("⚡ MAXIMUM (200M)")
+print("🌋 NEW: MEGA (500M)")
+print("👑 NEW: GOD MODE (1,000,000,000)")
+print("💥 Enhanced visual effects for all modes")
 print("💀 Elimination tracking")
-print("🌈 RGB border in MAXIMUM mode")
-print("Select mode then toggle ON!")
+print("🌈 Special effects for higher power modes")
+print("Select mode then toggle ON! 😎")
