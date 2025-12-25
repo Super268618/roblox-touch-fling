@@ -1,5 +1,6 @@
 -- SUPER'S MAXIMUM POWER TOUCHFLING -- ABSOLUTE MAXIMUM POWER WITH MULTIPLE MODES --
 -- Place in StarterPlayer → StarterPlayerScripts
+
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -26,12 +27,17 @@ local UltraBtn = Instance.new("TextButton")
 local MaxBtn = Instance.new("TextButton")
 local MegaBtn = Instance.new("TextButton")
 local GodBtn = Instance.new("TextButton")
--- New Higher Power Modes
 local FiveBBtn = Instance.new("TextButton")
 local TenBBtn = Instance.new("TextButton")
 local FiftyBBtn = Instance.new("TextButton")
 local HundredBBtn = Instance.new("TextButton")
 local OneTBtn = Instance.new("TextButton")
+-- New Higher Power Modes
+local FiveTBtn = Instance.new("TextButton")
+local HundredTBtn = Instance.new("TextButton")
+local FiveHundredTBtn = Instance.new("TextButton")
+local OneQABtn = Instance.new("TextButton")
+local InfiniteBtn = Instance.new("TextButton")
 
 -- Properties
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -43,7 +49,7 @@ Frame.BackgroundColor3 = Color3.fromRGB(10, 0, 0)
 Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
 Frame.BorderSizePixel = 3
 Frame.Position = UDim2.new(0.388539821, 0, 0.427821517, 0)
-Frame.Size = UDim2.new(0, 220, 0, 350) -- Increased height for scroller
+Frame.Size = UDim2.new(0, 220, 0, 380) -- Increased height for more modes
 Frame.Active = true
 Frame.Draggable = true
 
@@ -115,8 +121,8 @@ ModeScroller.Parent = Frame
 ModeScroller.BackgroundColor3 = Color3.fromRGB(25, 0, 0)
 ModeScroller.BorderSizePixel = 0
 ModeScroller.Position = UDim2.new(0.075, 0, 0.36, 0)
-ModeScroller.Size = UDim2.new(0.85, 0, 0, 155)
-ModeScroller.CanvasSize = UDim2.new(0, 0, 0, 360) -- Height for all buttons
+ModeScroller.Size = UDim2.new(0.85, 0, 0, 175) -- Increased height
+ModeScroller.CanvasSize = UDim2.new(0, 0, 0, 440) -- Increased for all buttons
 ModeScroller.ScrollBarThickness = 6
 ModeScroller.ScrollBarImageColor3 = Color3.fromRGB(255, 50, 50)
 
@@ -164,20 +170,24 @@ UltraBtn = createModeButton("💥 ULTRA (100M)", 3, Color3.fromRGB(200, 50, 100)
 MaxBtn = createModeButton("⚡ MAXIMUM (200M)", 4, Color3.fromRGB(255, 0, 150), Color3.fromRGB(255, 255, 255))
 MegaBtn = createModeButton("🌋 MEGA (500M)", 5, Color3.fromRGB(255, 100, 0), Color3.fromRGB(255, 255, 255))
 GodBtn = createModeButton("👑 GOD MODE (1B)", 6, Color3.fromRGB(255, 215, 0), Color3.fromRGB(0, 0, 0))
-
--- New Higher Power Modes
 FiveBBtn = createModeButton("💫 GALACTIC (5B)", 7, Color3.fromRGB(100, 200, 255), Color3.fromRGB(0, 0, 0))
 TenBBtn = createModeButton("🌟 SUPERNOVA (10B)", 8, Color3.fromRGB(200, 100, 255), Color3.fromRGB(255, 255, 255))
 FiftyBBtn = createModeButton("☄️ COSMIC (50B)", 9, Color3.fromRGB(255, 50, 255), Color3.fromRGB(255, 255, 255))
 HundredBBtn = createModeButton("🌌 UNIVERSE (100B)", 10, Color3.fromRGB(0, 200, 255), Color3.fromRGB(0, 0, 0))
 OneTBtn = createModeButton("⚡⚡ ULTIMATE (1T)", 11, Color3.fromRGB(255, 0, 0), Color3.fromRGB(255, 255, 255))
+-- New Ultra High Power Modes
+FiveTBtn = createModeButton("🌀 HYPERNOVA (5T)", 12, Color3.fromRGB(255, 100, 200), Color3.fromRGB(255, 255, 255))
+HundredTBtn = createModeButton("🌠 OMNIVERSAL (100T)", 13, Color3.fromRGB(100, 255, 100), Color3.fromRGB(0, 0, 0))
+FiveHundredTBtn = createModeButton("💥 BIG BANG (500T)", 14, Color3.fromRGB(255, 150, 0), Color3.fromRGB(255, 255, 255))
+OneQABtn = createModeButton("♾️ QUADRATONIC (1QA)", 15, Color3.fromRGB(255, 0, 255), Color3.fromRGB(255, 255, 255))
+InfiniteBtn = createModeButton("∞ ABSOLUTE INFINITE ∞", 16, Color3.fromRGB(255, 255, 255), Color3.fromRGB(0, 0, 0))
 
 KillCounter.Parent = Frame
 KillCounter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 KillCounter.BackgroundTransparency = 1.000
 KillCounter.BorderColor3 = Color3.fromRGB(0, 0, 0)
 KillCounter.BorderSizePixel = 0
-KillCounter.Position = UDim2.new(0.075, 0, 0.78, 0) -- Adjusted position
+KillCounter.Position = UDim2.new(0.075, 0, 0.78, 0)
 KillCounter.Size = UDim2.new(0.85, 0, 0, 20)
 KillCounter.Font = Enum.Font.Gotham
 KillCounter.Text = "💀 Eliminated: 0"
@@ -188,7 +198,7 @@ TextButton.Parent = Frame
 TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.125, 0, 0.88, 0) -- Adjusted position
+TextButton.Position = UDim2.new(0.125, 0, 0.88, 0)
 TextButton.Size = UDim2.new(0, 165, 0, 50)
 TextButton.Font = Enum.Font.GothamBold
 TextButton.Text = "OFF"
@@ -212,7 +222,7 @@ local function MaximumPowerFlingScript()
 	local killCount = 0
 	local currentMode = "NORMAL"
 	
-	-- Power settings per mode (UPDATED WITH NEW MODES)
+	-- Power settings per mode (UPDATED WITH NEW ULTRA MODES)
 	local FLING_POWERS = {
 		NORMAL = 50000000,
 		ULTRA = 100000000,
@@ -223,7 +233,13 @@ local function MaximumPowerFlingScript()
 		TENB = 10000000000,
 		FIFTYB = 50000000000,
 		HUNDREDB = 100000000000,
-		ONET = 1000000000000
+		ONET = 1000000000000,
+		-- New Ultra High Power Modes
+		FIVET = 5000000000000,
+		HUNDREDT = 100000000000000,
+		FIVEHUNDREDT = 500000000000000,
+		ONEQA = 1000000000000000, -- 1 Quadrillion
+		INFINITE = 9e18 -- Maximum safe integer in Lua, essentially infinite
 	}
 	
 	local currentPower = FLING_POWERS.NORMAL
@@ -244,7 +260,23 @@ local function MaximumPowerFlingScript()
 		local effectColor
 		local effectName
 		
-		if currentMode == "ONET" then
+		-- Determine effect based on mode
+		if currentMode == "INFINITE" then
+			effectColor = Color3.fromRGB(255, 255, 255)
+			effectName = "ABSOLUTE INFINITE"
+		elseif currentMode == "ONEQA" then
+			effectColor = Color3.fromRGB(255, 0, 255)
+			effectName = "QUADRATONIC"
+		elseif currentMode == "FIVEHUNDREDT" then
+			effectColor = Color3.fromRGB(255, 150, 0)
+			effectName = "BIG BANG"
+		elseif currentMode == "HUNDREDT" then
+			effectColor = Color3.fromRGB(100, 255, 100)
+			effectName = "OMNIVERSAL"
+		elseif currentMode == "FIVET" then
+			effectColor = Color3.fromRGB(255, 100, 200)
+			effectName = "HYPERNOVA"
+		elseif currentMode == "ONET" then
 			effectColor = Color3.fromRGB(255, 0, 0)
 			effectName = "ULTIMATE"
 		elseif currentMode == "HUNDREDB" then
@@ -282,10 +314,11 @@ local function MaximumPowerFlingScript()
 		local root = char:FindFirstChild("HumanoidRootPart")
 		if not root then return end
 		
-		-- Enhanced explosion effect for higher modes
+		-- Enhanced explosion effect based on mode power
 		local particleCount = 12
 		local explosionSize = 10
 		
+		-- Scale effects with power level
 		if currentMode == "MEGA" then
 			particleCount = 20
 			explosionSize = 15
@@ -307,8 +340,24 @@ local function MaximumPowerFlingScript()
 		elseif currentMode == "ONET" then
 			particleCount = 75
 			explosionSize = 50
+		elseif currentMode == "FIVET" then
+			particleCount = 85
+			explosionSize = 60
+		elseif currentMode == "HUNDREDT" then
+			particleCount = 95
+			explosionSize = 70
+		elseif currentMode == "FIVEHUNDREDT" then
+			particleCount = 110
+			explosionSize = 85
+		elseif currentMode == "ONEQA" then
+			particleCount = 130
+			explosionSize = 100
+		elseif currentMode == "INFINITE" then
+			particleCount = 150
+			explosionSize = 120
 		end
 		
+		-- Create explosion particles
 		for i = 1, particleCount do
 			local part = Instance.new("Part")
 			part.Size = Vector3.new(2, 2, 2)
@@ -352,6 +401,11 @@ local function MaximumPowerFlingScript()
 		if currentMode == "FIFTYB" then targetSize = 80 end
 		if currentMode == "HUNDREDB" then targetSize = 90 end
 		if currentMode == "ONET" then targetSize = 100 end
+		if currentMode == "FIVET" then targetSize = 120 end
+		if currentMode == "HUNDREDT" then targetSize = 150 end
+		if currentMode == "FIVEHUNDREDT" then targetSize = 180 end
+		if currentMode == "ONEQA" then targetSize = 220 end
+		if currentMode == "INFINITE" then targetSize = 300 end
 		
 		TweenService:Create(shockwave, TweenInfo.new(0.6), {
 			Size = Vector3.new(targetSize, targetSize, targetSize),
@@ -359,106 +413,189 @@ local function MaximumPowerFlingScript()
 		}):Play()
 		Debris:AddItem(shockwave, 0.6)
 		
-		-- Special effects for ULTIMATE mode (1T)
-		if currentMode == "ONET" then
-			-- Create multiple shockwaves
+		-- Special effects for INFINITE mode
+		if currentMode == "INFINITE" then
+			-- Create white energy burst
 			spawn(function()
-				for wave = 1, 3 do
+				for wave = 1, 5 do
 					local extraWave = Instance.new("Part")
 					extraWave.Size = Vector3.new(5, 5, 5)
 					extraWave.Position = root.Position
 					extraWave.Anchored = true
 					extraWave.CanCollide = false
 					extraWave.Material = Enum.Material.Neon
-					extraWave.Color = Color3.fromRGB(255, wave * 85, 0)
-					extraWave.Transparency = 0.3
+					extraWave.Color = Color3.fromRGB(255, 255, 255)
+					extraWave.Transparency = 0.2
 					extraWave.Shape = Enum.PartType.Ball
 					extraWave.Parent = FXFolder
 					
-					TweenService:Create(extraWave, TweenInfo.new(0.8), {
-						Size = Vector3.new(120, 120, 120),
+					TweenService:Create(extraWave, TweenInfo.new(1), {
+						Size = Vector3.new(350, 350, 350),
 						Transparency = 1
 					}):Play()
-					Debris:AddItem(extraWave, 0.8)
-					wait(0.2)
+					Debris:AddItem(extraWave, 1)
+					wait(0.1)
 				end
 			end)
 			
-			-- Create lightning bolts
+			-- Create orbiting infinity symbols
 			spawn(function()
 				for i = 1, 8 do
-					local lightning = Instance.new("Part")
-					lightning.Size = Vector3.new(0.5, 15, 0.5)
-					lightning.Position = root.Position + Vector3.new(0, 7.5, 0)
-					lightning.Anchored = true
-					lightning.CanCollide = false
-					lightning.Material = Enum.Material.Neon
-					lightning.Color = Color3.fromRGB(255, 255, 200)
-					lightning.Parent = FXFolder
+					local infPart = Instance.new("Part")
+					infPart.Size = Vector3.new(2, 2, 2)
+					infPart.Position = root.Position
+					infPart.Anchored = true
+					infPart.CanCollide = false
+					infPart.Material = Enum.Material.Neon
+					infPart.Color = Color3.fromRGB(255, 255, 255)
+					infPart.Parent = FXFolder
 					
 					local angle = (i / 8) * math.pi * 2
-					TweenService:Create(lightning, TweenInfo.new(0.4), {
-						Position = root.Position + Vector3.new(math.cos(angle) * 25, 7.5, math.sin(angle) * 25),
+					local distance = 25
+					TweenService:Create(infPart, TweenInfo.new(1.5), {
+						Position = root.Position + Vector3.new(math.cos(angle) * distance, 5, math.sin(angle) * distance),
 						Transparency = 1
 					}):Play()
-					Debris:AddItem(lightning, 0.4)
+					Debris:AddItem(infPart, 1.5)
 				end
 			end)
 		end
 		
-		-- Special effects for GOD mode
-		if currentMode == "GOD" then
-			-- Create a crown effect
+		-- Special effects for QUADRATONIC mode (1QA)
+		if currentMode == "ONEQA" then
 			spawn(function()
-				for i = 1, 5 do
-					local crownPart = Instance.new("Part")
-					crownPart.Size = Vector3.new(3, 0.5, 3)
-					crownPart.Position = root.Position + Vector3.new(0, 3, 0)
-					crownPart.Anchored = true
-					crownPart.CanCollide = false
-					crownPart.Material = Enum.Material.Neon
-					crownPart.Color = Color3.fromRGB(255, 215, 0)
-					crownPart.Parent = FXFolder
+				for wave = 1, 3 do
+					local rainbowWave = Instance.new("Part")
+					rainbowWave.Size = Vector3.new(10, 10, 10)
+					rainbowWave.Position = root.Position
+					rainbowWave.Anchored = true
+					rainbowWave.CanCollide = false
+					rainbowWave.Material = Enum.Material.Neon
+					rainbowWave.Color = Color3.fromHSV(wave/6, 1, 1)
+					rainbowWave.Transparency = 0.3
+					rainbowWave.Shape = Enum.PartType.Ball
+					rainbowWave.Parent = FXFolder
 					
-					local angle = (i / 5) * math.pi * 2
-					TweenService:Create(crownPart, TweenInfo.new(0.8), {
-						Position = root.Position + Vector3.new(math.cos(angle) * 4, 5, math.sin(angle) * 4),
-						Rotation = Vector3.new(0, math.deg(angle), 0),
+					TweenService:Create(rainbowWave, TweenInfo.new(0.8), {
+						Size = Vector3.new(250, 250, 250),
 						Transparency = 1
 					}):Play()
-					Debris:AddItem(crownPart, 0.8)
+					Debris:AddItem(rainbowWave, 0.8)
+					wait(0.15)
+				end
+			end)
+			
+			-- Create multi-colored particles
+			spawn(function()
+				for i = 1, 20 do
+					local rainbowPart = Instance.new("Part")
+					rainbowPart.Size = Vector3.new(3, 3, 3)
+					rainbowPart.Position = root.Position
+					rainbowPart.Anchored = true
+					rainbowPart.CanCollide = false
+					rainbowPart.Material = Enum.Material.Neon
+					rainbowPart.Color = Color3.fromHSV(i/20, 1, 1)
+					rainbowPart.Parent = FXFolder
+					
+					local angle = (i/20) * math.pi * 2
+					TweenService:Create(rainbowPart, TweenInfo.new(1), {
+						Position = root.Position + Vector3.new(math.cos(angle) * 40, math.random(-10, 10), math.sin(angle) * 40),
+						Transparency = 1
+					}):Play()
+					Debris:AddItem(rainbowPart, 1)
+				end
+			end)
+		end
+		
+		-- Special effects for BIG BANG mode (500T)
+		if currentMode == "FIVEHUNDREDT" then
+			spawn(function()
+				-- Create expanding rings
+				for ring = 1, 3 do
+					local ringPart = Instance.new("Part")
+					ringPart.Size = Vector3.new(1, 1, 200)
+					ringPart.Position = root.Position
+					ringPart.Anchored = true
+					ringPart.CanCollide = false
+					ringPart.Material = Enum.Material.Neon
+					ringPart.Color = Color3.fromRGB(255, 150, 0)
+					ringPart.Transparency = 0.4
+					ringPart.Parent = FXFolder
+					
+					TweenService:Create(ringPart, TweenInfo.new(0.7), {
+						Size = Vector3.new(1, 1, 400),
+						Transparency = 1
+					}):Play()
+					Debris:AddItem(ringPart, 0.7)
+					
+					local ringPart2 = Instance.new("Part")
+					ringPart2.Size = Vector3.new(200, 1, 1)
+					ringPart2.Position = root.Position
+					ringPart2.Anchored = true
+					ringPart2.CanCollide = false
+					ringPart2.Material = Enum.Material.Neon
+					ringPart2.Color = Color3.fromRGB(255, 100, 0)
+					ringPart2.Transparency = 0.4
+					ringPart2.Parent = FXFolder
+					
+					TweenService:Create(ringPart2, TweenInfo.new(0.7), {
+						Size = Vector3.new(400, 1, 1),
+						Transparency = 1
+					}):Play()
+					Debris:AddItem(ringPart2, 0.7)
 					wait(0.1)
 				end
 			end)
 		end
 		
-		-- Special effects for GALACTIC and higher modes
-		if currentMode == "FIVEB" or currentMode == "TENB" or currentMode == "FIFTYB" or currentMode == "HUNDREDB" then
+		-- Special effects for OMNIVERSAL mode (100T)
+		if currentMode == "HUNDREDT" then
 			spawn(function()
-				-- Create orbiting particles
-				for orbit = 1, 3 do
-					for i = 1, 8 do
-						local star = Instance.new("Part")
-						star.Size = Vector3.new(1, 1, 1)
-						star.Position = root.Position
-						star.Anchored = true
-						star.CanCollide = false
-						star.Material = Enum.Material.Neon
-						star.Color = effectColor
-						star.Shape = Enum.PartType.Ball
-						star.Parent = FXFolder
-						
-						local radius = 10 + (orbit * 5)
-						local angle = (i / 8) * math.pi * 2
-						local height = math.sin(i) * 3
-						
-						TweenService:Create(star, TweenInfo.new(1), {
-							Position = root.Position + Vector3.new(math.cos(angle) * radius, height, math.sin(angle) * radius),
-							Transparency = 1
-						}):Play()
-						Debris:AddItem(star, 1)
-					end
-					wait(0.1)
+				-- Create green energy orbs
+				for orb = 1, 4 do
+					local orbPart = Instance.new("Part")
+					orbPart.Size = Vector3.new(15, 15, 15)
+					orbPart.Position = root.Position
+					orbPart.Anchored = true
+					orbPart.CanCollide = false
+					orbPart.Material = Enum.Material.Neon
+					orbPart.Color = Color3.fromRGB(100, 255, 100)
+					orbPart.Transparency = 0.3
+					orbPart.Shape = Enum.PartType.Ball
+					orbPart.Parent = FXFolder
+					
+					TweenService:Create(orbPart, TweenInfo.new(0.9), {
+						Size = Vector3.new(200, 200, 200),
+						Transparency = 1
+					}):Play()
+					Debris:AddItem(orbPart, 0.9)
+					wait(0.15)
+				end
+			end)
+		end
+		
+		-- Special effects for HYPERNOVA mode (5T)
+		if currentMode == "FIVET" then
+			spawn(function()
+				-- Create pink spiral effect
+				for i = 1, 12 do
+					local spiralPart = Instance.new("Part")
+					spiralPart.Size = Vector3.new(4, 4, 4)
+					spiralPart.Position = root.Position
+					spiralPart.Anchored = true
+					spiralPart.CanCollide = false
+					spiralPart.Material = Enum.Material.Neon
+					spiralPart.Color = Color3.fromRGB(255, 100, 200)
+					spiralPart.Shape = Enum.PartType.Ball
+					spiralPart.Parent = FXFolder
+					
+					local angle = (i/12) * math.pi * 4
+					local distance = 30
+					TweenService:Create(spiralPart, TweenInfo.new(1.2), {
+						Position = root.Position + Vector3.new(math.cos(angle) * distance, math.sin(angle) * 5, math.sin(angle) * distance),
+						Transparency = 1
+					}):Play()
+					Debris:AddItem(spiralPart, 1.2)
 				end
 			end)
 		end
@@ -527,11 +664,13 @@ local function MaximumPowerFlingScript()
 	
 	-- Function to format large numbers
 	local function formatNumber(num)
-		if num >= 1000000000000 then
+		if num >= 1000000000000000 then -- Quadrillion
+			return string.format("%.1fQA", num / 1000000000000000)
+		elseif num >= 1000000000000 then -- Trillion
 			return string.format("%.1fT", num / 1000000000000)
-		elseif num >= 1000000000 then
+		elseif num >= 1000000000 then -- Billion
 			return string.format("%.1fB", num / 1000000000)
-		elseif num >= 1000000 then
+		elseif num >= 1000000 then -- Million
 			return string.format("%.1fM", num / 1000000)
 		else
 			return tostring(num)
@@ -553,8 +692,8 @@ local function MaximumPowerFlingScript()
 	end
 	
 	NormalBtn.MouseButton1Click:Connect(function()
-		setMode("NORMAL", FLING_POWERS.NORMAL, "50M", 
-			Color3.fromRGB(255, 255, 0), 
+		setMode("NORMAL", FLING_POWERS.NORMAL, "50M",
+			Color3.fromRGB(255, 255, 0),
 			Color3.fromRGB(255, 0, 0),
 			"🔥 NORMAL MODE 🔥")
 	end)
@@ -622,6 +761,42 @@ local function MaximumPowerFlingScript()
 			"⚡⚡ ULTIMATE MODE ⚡⚡")
 	end)
 	
+	-- New Ultra High Power Mode Buttons
+	FiveTBtn.MouseButton1Click:Connect(function()
+		setMode("FIVET", FLING_POWERS.FIVET, "5T",
+			Color3.fromRGB(255, 100, 200),
+			Color3.fromRGB(255, 100, 200),
+			"🌀 HYPERNOVA MODE 🌀")
+	end)
+	
+	HundredTBtn.MouseButton1Click:Connect(function()
+		setMode("HUNDREDT", FLING_POWERS.HUNDREDT, "100T",
+			Color3.fromRGB(100, 255, 100),
+			Color3.fromRGB(100, 255, 100),
+			"🌠 OMNIVERSAL MODE 🌠")
+	end)
+	
+	FiveHundredTBtn.MouseButton1Click:Connect(function()
+		setMode("FIVEHUNDREDT", FLING_POWERS.FIVEHUNDREDT, "500T",
+			Color3.fromRGB(255, 150, 0),
+			Color3.fromRGB(255, 150, 0),
+			"💥 BIG BANG MODE 💥")
+	end)
+	
+	OneQABtn.MouseButton1Click:Connect(function()
+		setMode("ONEQA", FLING_POWERS.ONEQA, "1QA",
+			Color3.fromRGB(255, 0, 255),
+			Color3.fromRGB(255, 0, 255),
+			"♾️ QUADRATONIC MODE ♾️")
+	end)
+	
+	InfiniteBtn.MouseButton1Click:Connect(function()
+		setMode("INFINITE", FLING_POWERS.INFINITE, "∞",
+			Color3.fromRGB(255, 255, 255),
+			Color3.fromRGB(255, 255, 255),
+			"∞ ABSOLUTE INFINITE ∞")
+	end)
+	
 	-- Main toggle
 	toggleButton.MouseButton1Click:Connect(function()
 		hiddenfling = not hiddenfling
@@ -631,8 +806,19 @@ local function MaximumPowerFlingScript()
 			toggleButton.BackgroundColor3 = Color3.fromRGB(100, 255, 100)
 			toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			
+			-- Set header color based on mode
 			local headerColor
-			if currentMode == "ONET" then
+			if currentMode == "INFINITE" then
+				headerColor = Color3.fromRGB(255, 255, 255)
+			elseif currentMode == "ONEQA" then
+				headerColor = Color3.fromRGB(255, 0, 255)
+			elseif currentMode == "FIVEHUNDREDT" then
+				headerColor = Color3.fromRGB(255, 150, 0)
+			elseif currentMode == "HUNDREDT" then
+				headerColor = Color3.fromRGB(100, 255, 100)
+			elseif currentMode == "FIVET" then
+				headerColor = Color3.fromRGB(255, 100, 200)
+			elseif currentMode == "ONET" then
 				headerColor = Color3.fromRGB(255, 0, 0)
 			elseif currentMode == "HUNDREDB" then
 				headerColor = Color3.fromRGB(0, 200, 255)
@@ -660,7 +846,72 @@ local function MaximumPowerFlingScript()
 			createActivationEffect()
 			
 			-- Special border effects based on mode
-			if currentMode == "ONET" then
+			if currentMode == "INFINITE" then
+				-- White rainbow pulse effect for INFINITE mode
+				spawn(function()
+					while hiddenfling do
+						for hue = 0, 360, 5 do
+							if not hiddenfling then break end
+							local color = Color3.fromHSV(hue/360, 0.3, 1)
+							Frame.BorderColor3 = color
+							PowerLabel.TextColor3 = color
+							wait(0.02)
+						end
+					end
+				end)
+			elseif currentMode == "ONEQA" then
+				-- Rainbow pulse effect for QUADRATONIC mode
+				spawn(function()
+					while hiddenfling do
+						for hue = 0, 360, 10 do
+							if not hiddenfling then break end
+							local color = Color3.fromHSV(hue/360, 1, 1)
+							Frame.BorderColor3 = color
+							PowerLabel.TextColor3 = color
+							wait(0.03)
+						end
+					end
+				end)
+			elseif currentMode == "FIVEHUNDREDT" then
+				-- Orange pulse effect for BIG BANG mode
+				spawn(function()
+					while hiddenfling do
+						for i = 1, 10 do
+							if not hiddenfling then break end
+							local intensity = math.sin(i * 0.5) * 0.5 + 0.5
+							Frame.BorderColor3 = Color3.fromRGB(255, 150, 0):Lerp(Color3.fromRGB(255, 255, 100), intensity)
+							PowerLabel.TextColor3 = Color3.fromRGB(255, 150, 0):Lerp(Color3.fromRGB(255, 255, 100), intensity)
+							wait(0.05)
+						end
+					end
+				end)
+			elseif currentMode == "HUNDREDT" then
+				-- Green pulse effect for OMNIVERSAL mode
+				spawn(function()
+					while hiddenfling do
+						for i = 1, 10 do
+							if not hiddenfling then break end
+							local intensity = math.sin(i * 0.5) * 0.5 + 0.5
+							Frame.BorderColor3 = Color3.fromRGB(100, 255, 100):Lerp(Color3.fromRGB(200, 255, 200), intensity)
+							PowerLabel.TextColor3 = Color3.fromRGB(100, 255, 100):Lerp(Color3.fromRGB(200, 255, 200), intensity)
+							wait(0.05)
+						end
+					end
+				end)
+			elseif currentMode == "FIVET" then
+				-- Pink pulse effect for HYPERNOVA mode
+				spawn(function()
+					while hiddenfling do
+						for i = 1, 10 do
+							if not hiddenfling then break end
+							local intensity = math.sin(i * 0.5) * 0.5 + 0.5
+							Frame.BorderColor3 = Color3.fromRGB(255, 100, 200):Lerp(Color3.fromRGB(255, 200, 230), intensity)
+							PowerLabel.TextColor3 = Color3.fromRGB(255, 100, 200):Lerp(Color3.fromRGB(255, 200, 230), intensity)
+							wait(0.05)
+						end
+					end
+				end)
+			elseif currentMode == "ONET" then
 				-- Red pulse effect for ULTIMATE mode
 				spawn(function()
 					while hiddenfling do
@@ -669,19 +920,6 @@ local function MaximumPowerFlingScript()
 							local intensity = math.sin(i * 0.5) * 0.5 + 0.5
 							Frame.BorderColor3 = Color3.fromRGB(255, 0, 0):Lerp(Color3.fromRGB(255, 150, 150), intensity)
 							PowerLabel.TextColor3 = Color3.fromRGB(255, 0, 0):Lerp(Color3.fromRGB(255, 150, 150), intensity)
-							wait(0.05)
-						end
-					end
-				end)
-			elseif currentMode == "HUNDREDB" then
-				-- Blue pulse effect for UNIVERSE mode
-				spawn(function()
-					while hiddenfling do
-						for i = 1, 10 do
-							if not hiddenfling then break end
-							local intensity = math.sin(i * 0.5) * 0.5 + 0.5
-							Frame.BorderColor3 = Color3.fromRGB(0, 200, 255):Lerp(Color3.fromRGB(150, 230, 255), intensity)
-							PowerLabel.TextColor3 = Color3.fromRGB(0, 200, 255):Lerp(Color3.fromRGB(150, 230, 255), intensity)
 							wait(0.05)
 						end
 					end
@@ -718,7 +956,7 @@ local function MaximumPowerFlingScript()
 					while hiddenfling do
 						for hue = 0, 360, 10 do
 							if not hiddenfling then break end
-							local color = Color3.fromHSV(hue / 360, 1, 1)
+							local color = Color3.fromHSV(hue/360, 1, 1)
 							Frame.BorderColor3 = color
 							PowerLabel.TextColor3 = color
 							wait(0.05)
@@ -754,14 +992,22 @@ local function MaximumPowerFlingScript()
 			spawn(monitorPlayers)
 			
 			-- Special warnings for higher modes
-			if currentMode == "ONET" then
+			if currentMode == "INFINITE" then
+				warn("∞∞∞ ABSOLUTE INFINITE MODE ACTIVATED - INFINITE POWER! ∞∞∞")
+			elseif currentMode == "ONEQA" then
+				warn("♾️♾️♾️ QUADRATONIC MODE ACTIVATED - 1 QUADRILLION POWER! ♾️♾️♾️")
+			elseif currentMode == "FIVEHUNDREDT" then
+				warn("💥💥💥 BIG BANG MODE ACTIVATED - 500 TRILLION POWER! 💥💥💥")
+			elseif currentMode == "HUNDREDT" then
+				warn("🌠🌠🌠 OMNIVERSAL MODE ACTIVATED - 100 TRILLION POWER! 🌠🌠🌠")
+			elseif currentMode == "FIVET" then
+				warn("🌀🌀🌀 HYPERNOVA MODE ACTIVATED - 5 TRILLION POWER! 🌀🌀🌀")
+			elseif currentMode == "ONET" then
 				warn("⚡⚡⚡ ULTIMATE MODE ACTIVATED - 1 TRILLION POWER! ⚡⚡⚡")
 			elseif currentMode == "HUNDREDB" then
 				warn("🌌🌌🌌 UNIVERSE MODE ACTIVATED - 100 BILLION POWER! 🌌🌌🌌")
 			elseif currentMode == "GOD" then
 				warn("⚡⚡⚡ GOD MODE ACTIVATED - UNSTOPPABLE POWER! ⚡⚡⚡")
-			elseif currentMode == "MEGA" then
-				warn("🌋🌋🌋 MEGA MODE ACTIVATED - VOLCANIC POWER! 🌋🌋🌋")
 			end
 			
 		else
@@ -771,8 +1017,19 @@ local function MaximumPowerFlingScript()
 			Frame_2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 			HeaderCover.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 			
+			-- Reset border color to mode color
 			local borderColor
-			if currentMode == "ONET" then
+			if currentMode == "INFINITE" then
+				borderColor = Color3.fromRGB(255, 255, 255)
+			elseif currentMode == "ONEQA" then
+				borderColor = Color3.fromRGB(255, 0, 255)
+			elseif currentMode == "FIVEHUNDREDT" then
+				borderColor = Color3.fromRGB(255, 150, 0)
+			elseif currentMode == "HUNDREDT" then
+				borderColor = Color3.fromRGB(100, 255, 100)
+			elseif currentMode == "FIVET" then
+				borderColor = Color3.fromRGB(255, 100, 200)
+			elseif currentMode == "ONET" then
 				borderColor = Color3.fromRGB(255, 0, 0)
 			elseif currentMode == "HUNDREDB" then
 				borderColor = Color3.fromRGB(0, 200, 255)
@@ -796,8 +1053,19 @@ local function MaximumPowerFlingScript()
 			
 			Frame.BorderColor3 = borderColor
 			
+			-- Reset power label color
 			local powerColor
-			if currentMode == "ONET" then
+			if currentMode == "INFINITE" then
+				powerColor = Color3.fromRGB(255, 255, 255)
+			elseif currentMode == "ONEQA" then
+				powerColor = Color3.fromRGB(255, 0, 255)
+			elseif currentMode == "FIVEHUNDREDT" then
+				powerColor = Color3.fromRGB(255, 150, 0)
+			elseif currentMode == "HUNDREDT" then
+				powerColor = Color3.fromRGB(100, 255, 100)
+			elseif currentMode == "FIVET" then
+				powerColor = Color3.fromRGB(255, 100, 200)
+			elseif currentMode == "ONET" then
 				powerColor = Color3.fromRGB(255, 0, 0)
 			elseif currentMode == "HUNDREDB" then
 				powerColor = Color3.fromRGB(0, 200, 255)
@@ -829,17 +1097,22 @@ end
 coroutine.wrap(MaximumPowerFlingScript)()
 
 print("🔥💀⚡ SUPER'S MAXIMUM POWER TOUCHFLING LOADED ⚡💀🔥")
-print("⚡ 10 POWER MODES NOW AVAILABLE:")
+print("⚡ 15 POWER MODES NOW AVAILABLE:")
 print("🔥 NORMAL (50M)")
 print("💥 ULTRA (100M)")
 print("⚡ MAXIMUM (200M)")
 print("🌋 MEGA (500M)")
 print("👑 GOD MODE (1B)")
-print("💫 NEW: GALACTIC (5B)")
-print("🌟 NEW: SUPERNOVA (10B)")
-print("☄️ NEW: COSMIC (50B)")
-print("🌌 NEW: UNIVERSE (100B)")
-print("⚡⚡ NEW: ULTIMATE (1 TRILLION)")
+print("💫 GALACTIC (5B)")
+print("🌟 SUPERNOVA (10B)")
+print("☄️ COSMIC (50B)")
+print("🌌 UNIVERSE (100B)")
+print("⚡⚡ ULTIMATE (1T)")
+print("🌀 NEW: HYPERNOVA (5T)")
+print("🌠 NEW: OMNIVERSAL (100T)")
+print("💥 NEW: BIG BANG (500T)")
+print("♾️ NEW: QUADRATONIC (1QA)")
+print("∞ NEW: ABSOLUTE INFINITE (∞)")
 print("📜 Scrolling mode selection")
 print("💀 Elimination tracking")
 print("🌈 Special effects for all power modes")
